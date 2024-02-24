@@ -32,14 +32,14 @@ class _UsersPageSearchState extends ConsumerState<UsersPageSearch> {
         hintText: AppStrings.searchButton,
         onClearPressed: () {
           _searchController.clear();
-          ref.invalidate(userSearchStateProvider);
+          ref.read(userSearchStateProvider.notifier).clear();
         },
         onChanged: (value) {
           if (value.isNotEmpty) {
             var filteredUsers = widget.usersData.where((user) => user.username?.toLowerCase().contains(value.toLowerCase()) ?? false).toList();
             ref.read(userSearchStateProvider.notifier).notify(filteredUsers);
           } else {
-            ref.invalidate(userSearchStateProvider);
+            ref.read(userSearchStateProvider.notifier).clear();
           }
         },
       ),

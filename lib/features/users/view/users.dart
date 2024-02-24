@@ -28,7 +28,7 @@ class UsersPageView extends ConsumerWidget with UsersPageViewMixin {
                 Flexible(child: UsersPageSearch(usersData: usersData.data as List<UsersResponseModel>)),
                 Flexible(
                   flex: 10,
-                  child: isUserNotFound(usersData.data, userSearchProvider)
+                  child: isUserNotFound(userSearchProvider)
                       ? const Center(child: Text(AppStrings.userNotFound))
                       : ListView.builder(
                           padding: EdgeInsets.only(top: context.responsiveWidth(5)),

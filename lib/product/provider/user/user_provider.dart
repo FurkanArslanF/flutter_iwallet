@@ -19,4 +19,8 @@ class UserSearchNotifier extends StateNotifier<List<UsersResponseModel>?> {
   void notify(List<UsersResponseModel>? data) {
     state = data;
   }
+
+  void clear() {
+    state = null;
+  }
 }
