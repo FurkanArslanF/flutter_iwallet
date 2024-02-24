@@ -8,37 +8,50 @@ import 'package:flutter_iwallet/product/model/user/user_response.dart';
 class UsersDetailDialog extends StatelessWidget {
   const UsersDetailDialog({super.key, required this.userImage, required this.usersData});
   final String userImage;
-  final UsersResponseModel usersData;
+  final UsersResponseModel? usersData;
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        height: context.responsiveWidth(140),
+        height: context.responsiveWidth(145),
         padding: EdgeInsets.all(context.responsiveWidth(5)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Align(alignment: Alignment.topRight, child: AppCloseButton()),
-            SizedBox(height: context.responsiveWidth(1)),
-            ClipOval(child: SizedBox(height: context.responsiveWidth(50), width: context.responsiveWidth(50), child: AppNetworkImage(path: userImage))),
-            SizedBox(height: context.responsiveWidth(5)),
-            Text(usersData.name ?? '', style: TextStyle(fontSize: context.responsiveText(15), fontWeight: FontWeight.bold)),
-            Text("@${usersData.username ?? ''}", style: TextStyle(fontSize: context.responsiveText(15))),
-            SizedBox(height: context.responsiveWidth(5)),
-            UserInfoRow(title: AppStrings.email, value: usersData.email ?? ''),
-            SizedBox(height: context.responsiveWidth(2)),
-            UserInfoRow(title: AppStrings.phone, value: usersData.phone ?? ''),
-            SizedBox(height: context.responsiveWidth(2)),
-            UserInfoRow(title: AppStrings.address, value: "${usersData.address?.street ?? ''} ${usersData.address?.suite ?? ''}"),
-            SizedBox(height: context.responsiveWidth(2)),
-            UserInfoRow(title: AppStrings.city, value: usersData.address?.city ?? ''),
-            SizedBox(height: context.responsiveWidth(2)),
-            UserInfoRow(title: AppStrings.location, value: "${usersData.address?.geo?.lat ?? ''} ${usersData.address?.geo?.lng ?? ''}"),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Align(alignment: Alignment.topRight, child: AppCloseButton()),
+              SizedBox(height: context.responsiveWidth(1)),
+              ClipOval(child: SizedBox(height: context.responsiveWidth(50), width: context.responsiveWidth(50), child: AppNetworkImage(path: userImage))),
+              SizedBox(height: context.responsiveWidth(5)),
+              UserInfoText(title: usersData?.name ?? '', textStyle: TextStyle(fontSize: context.responsiveText(11), fontWeight: FontWeight.bold)),
+              UserInfoText(title: "@${usersData?.username ?? ''}", textStyle: TextStyle(fontSize: context.responsiveText(11))),
+              SizedBox(height: context.responsiveWidth(5)),
+              UserInfoRow(title: AppStrings.email, value: usersData?.email ?? ''),
+              SizedBox(height: context.responsiveWidth(2)),
+              UserInfoRow(title: AppStrings.phone, value: usersData?.phone ?? ''),
+              SizedBox(height: context.responsiveWidth(2)),
+              UserInfoRow(title: AppStrings.address, value: "${usersData?.address?.street ?? ''} ${usersData?.address?.suite ?? ''}"),
+              SizedBox(height: context.responsiveWidth(2)),
+              UserInfoRow(title: AppStrings.city, value: usersData?.address?.city ?? ''),
+              SizedBox(height: context.responsiveWidth(2)),
+              UserInfoRow(title: AppStrings.location, value: "${usersData?.address?.geo?.lat ?? ''} ${usersData?.address?.geo?.lng ?? ''}"),
+            ],
+          ),
         ),
       ),
     );
+  }
+}
+
+class UserInfoText extends StatelessWidget {
+  const UserInfoText({super.key, required this.title, this.textStyle});
+  final String title;
+  final TextStyle? textStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(title, style: textStyle);
   }
 }
 

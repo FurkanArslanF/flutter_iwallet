@@ -14,8 +14,11 @@ class AppSearchBar extends StatelessWidget {
       onChanged: onChanged,
       controller: controller,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(context.responsiveWidth(2)),
+        contentPadding: EdgeInsets.zero,
         hintText: hintText,
+        hintStyle: TextStyle(
+          fontSize: context.responsiveText(10),
+        ),
         prefixIcon: const Icon(Icons.search),
         suffixIcon: IconButton(
           onPressed: onClearPressed,

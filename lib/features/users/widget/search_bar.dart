@@ -24,25 +24,21 @@ class _UsersPageSearchState extends ConsumerState<UsersPageSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.responsiveWidth(90),
-      height: context.responsiveWidth(10),
-      child: AppSearchBar(
-        controller: _searchController,
-        hintText: AppStrings.searchButton,
-        onClearPressed: () {
-          _searchController.clear();
+    return AppSearchBar(
+      controller: _searchController,
+      hintText: AppStrings.searchButton,
+      onClearPressed: () {
+        _searchController.clear();
+        ref.read(userSearchStateProvider.notifier).clear();
+      },
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          var filteredUsers = widget.usersData.where((user) => user.username?.toLowerCase().contains(value.toLowerCase()) ?? false).toList();
+          ref.read(userSearchStateProvider.notifier).notify(filteredUsers);
+        } else {
           ref.read(userSearchStateProvider.notifier).clear();
-        },
-        onChanged: (value) {
-          if (value.isNotEmpty) {
-            var filteredUsers = widget.usersData.where((user) => user.username?.toLowerCase().contains(value.toLowerCase()) ?? false).toList();
-            ref.read(userSearchStateProvider.notifier).notify(filteredUsers);
-          } else {
-            ref.read(userSearchStateProvider.notifier).clear();
-          }
-        },
-      ),
+        }
+      },
     );
   }
 }

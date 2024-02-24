@@ -25,16 +25,17 @@ class UsersPageView extends ConsumerWidget with UsersPageViewMixin {
             padding: EdgeInsets.all(context.responsiveWidth(5)),
             child: Column(
               children: [
-                Flexible(child: UsersPageSearch(usersData: usersData.data as List<UsersResponseModel>)),
+                UsersPageSearch(usersData: usersData.data as List<UsersResponseModel>),
+                SizedBox(height: context.responsiveWidth(2)),
                 Flexible(
                   flex: 10,
                   child: isUserNotFound(userSearchProvider)
                       ? const Center(child: Text(AppStrings.userNotFound))
                       : ListView.builder(
-                          padding: EdgeInsets.only(top: context.responsiveWidth(5)),
-                          itemCount: userSearchProvider?.length ?? usersData.data!.length,
+                          padding: EdgeInsets.zero,
+                          itemCount: userSearchProvider?.length ?? usersData.data?.length,
                           itemBuilder: (context, index) {
-                            return UsersPageList(usersData: userSearchProvider?[index] ?? usersData.data![index]);
+                            return UsersPageList(usersData: userSearchProvider?[index] ?? usersData.data?[index]);
                           },
                         ),
                 ),
