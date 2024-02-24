@@ -11,6 +11,13 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.6
 
+  #State Management
+  riverpod: ^2.5.0
+
+  #Services
+  http: ^1.2.1
+  hooks_riverpod: ^2.4.10
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
