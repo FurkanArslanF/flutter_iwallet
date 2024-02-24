@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iwallet/core/theme/theme.dart';
 import 'package:flutter_iwallet/features/users/view/users.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,9 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
-      home: UsersPageView(),
+      debugShowCheckedModeBanner: false,
+      home: const UsersPageView(),
+      theme: appTheme(context),
     );
   }
 }
